@@ -4,12 +4,33 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+      integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+      crossorigin="anonymous"
+    />
     <title>Rock Paper Scissors</title>
   </head>
   <body>
-    <h1>Rock Paper Scissors</h1>
-    <h3>Open the console to start playing!</h3>
-
+    <div class="container">
+      <div class="row"><h1>Rock Paper Scissors</h1></div>
+      <div class="row">
+        <button class="btn btn-secondary" id="rock">Rock</button>
+        <button class="btn btn-secondary" id="paper">Paper</button>
+        <button class="btn btn-secondary" id="scissors">Scissors</button>
+      </div>
+      <div class="results">
+        <div class="row"><h3>Score</h3></div>
+        <div class="row"><h5 id="message"></h5></div>
+        <div class="row">
+          <div class="col">Player: <span id="playerScore">0</span></div>
+          <div class="col">Computer: <span id="computerScore">0</span></div>
+        </div>
+      </div>
+      <button class="btn btn-primary" id="reset">Reset Score!</button>
+    </div>
     <script src="index.js"></script>
   </body>
 </html>
