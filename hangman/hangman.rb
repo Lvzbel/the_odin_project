@@ -3,6 +3,7 @@ require "yaml"
 
 system 'clear'
 end_game = false
+saved_game = "gamesave.txt"
 
 # Load and convert txt file into an array
 dictionary_txt = File.read "5desk.txt"
@@ -59,6 +60,15 @@ def load_game()
 end
 
 current_status = deep_copy(new_status)
+
+if File.exists?(saved_game)
+  puts "Would you like to load your game saved? Y/N"
+  answer = gets.chomp.downcase
+  if answer == "y"
+    current_status = load_game()
+  end
+end
+
 
 # Game loop
 until end_game
