@@ -21,7 +21,7 @@ end
 
 new_status = {
   remaining_guesses: 5,
-  wrong_guesses: 0,
+  wrong_guesses: [],
   word: ramdon_word(dictionary).split(""),
   guessed_letters: []
 }
@@ -34,14 +34,23 @@ def render_game_score(secret_word_array, guesses_array)
   display
 end
 
+def render_wrong_guesses(guess_array)
+  display = ""
+  guess_array.map do |letter|
+    display << "#{letter}  "
+  end
+  display
+end
+
 current_status = deep_copy(new_status)
 
 # Game loop
 until end_game
-  # system 'clear'
+  system 'clear'
 
   puts "What would you like to do? Type 'exit' to quit end the game, Type 'save' to save the game and quit or type a single letter to continue with the game \n"
   puts "Scoreboard: #{render_game_score(current_status[:word], current_status[:guessed_letters])}   Tries: #{current_status[:remaining_guesses]}"
+  puts "Wrong guesses: #{render_wrong_guesses(current_status[:wrong_guesses])}"
   input = gets.chomp.downcase
 
   if input == "exit"
@@ -51,8 +60,9 @@ until end_game
     puts "Saving game, see you next time!"
     end_game = true
   elsif input.length == 1 && input.match(/[a-z]/)
+
     # Check if we already try this letter
-    if current_status[:guessed_letters].include?(input)
+    if current_status[:guessed_letters].include?(input) || current_status[:wrong_guesses].include?(input)
       puts "Duplicate guess, please try again"
       # If not a duplicate added to the guessed_letters array
     elsif current_status[:word].include?(input)
@@ -60,7 +70,9 @@ until end_game
       # If the guess is wrong subtract one remaining guess
     else
       current_status[:remaining_guesses] -= 1
+      current_status[:wrong_guesses] << input
     end
+    
     # If we run out of tries end the game
     if current_status[:remaining_guesses] == 0
       end_game = true
