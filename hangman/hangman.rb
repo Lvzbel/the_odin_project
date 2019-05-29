@@ -1,4 +1,4 @@
-end_game = false
+end_game = true
 
 # Load and convert txt file into an array
 dictionary_txt = File.read "5desk.txt"
@@ -27,10 +27,20 @@ new_status = {
   right_guesses: []
 }
 
+def render_game_score(secret_word_array, guesses_array)
+  display = ""
+  secret_word_array.each do |letter|
+    guesses_array.include?(letter) ? display << letter : display << "_"
+  end
+  puts display
+end
+
 current_status = deep_copy(new_status)
 
 # Game loop
 until end_game
+  # system 'clear'
+
   puts "What would you like to do? Type 'exit' to quit end the game, Type 'save' to save the game and quit or type a single letter to continue with the game"
   input = gets.chomp.downcase
 
@@ -46,3 +56,5 @@ until end_game
     puts "Invalid input please try again"
   end
 end
+
+render_game_score(["c","o","t","o"], ["o", "t"])
