@@ -51,7 +51,20 @@ until end_game
     puts "Saving game, see you next time!"
     end_game = true
   elsif input.length == 1 && input.match(/[a-z]/)
-    puts "valid guess"
+    # Check if we already try this letter
+    if current_status[:guessed_letters].include?(input)
+      puts "Duplicate guess, please try again"
+      # If not a duplicate added to the guessed_letters array
+    elsif current_status[:word].include?(input)
+      current_status[:guessed_letters] << input
+      # If the guess is wrong subtract one remaining guess
+    else
+      current_status[:remaining_guesses] -= 1
+    end
+    # If we run out of tries end the game
+    if current_status[:remaining_guesses] == 0
+      end_game = true
+    end
   else
     puts "Invalid input please try again"
   end
