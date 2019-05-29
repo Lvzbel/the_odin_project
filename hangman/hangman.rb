@@ -1,4 +1,4 @@
-puts "Game has started"
+end_game = true
 
 # Load and convert txt file into an array
 dictionary_txt = File.read "5desk.txt"
@@ -8,13 +8,23 @@ dictionary = dictionary_txt.split(/\n/)
 def ramdon_word(words_array)
   random_number = rand(0..words_array.length)
   word = words_array[random_number].gsub!(/\r/, "")
-  p word
   if word.length >= 5 && word.length <= 12
     return word.downcase
   else
-    puts "Looking for another word"
     ramdon_word(words_array)
   end
 end 
 
-p ramdon_word(dictionary)
+new_status = {
+  remaining_guesses: 5,
+  wrong_guesses: 0,
+  word: ramdon_word(dictionary).split(""),
+  guessed_letters: []
+}
+
+p new_status[:word]
+
+# Game loop
+until end_game
+  puts "Hello"
+end
