@@ -1,4 +1,6 @@
 require 'set'
+require "yaml"
+
 system 'clear'
 end_game = false
 
@@ -44,6 +46,13 @@ def render_wrong_guesses(guess_array)
   display
 end
 
+def save_game(status_hash)
+  data = status_hash.to_yaml
+  File.open("gamesave.txt", 'w') do |file|
+    file.puts data
+  end
+end
+
 current_status = deep_copy(new_status)
 
 # Game loop
@@ -59,10 +68,10 @@ until end_game
     puts "Thanks for playing, see you next time!"
     end_game = true
   elsif input == 'save'
+    save_game(current_status)
     puts "Saving game, see you next time!"
     end_game = true
   elsif input.length == 1 && input.match(/[a-z]/)
-
     # Check if we already try this letter
     if current_status[:guessed_letters].include?(input) || current_status[:wrong_guesses].include?(input)
       puts "Duplicate guess, please try again"
