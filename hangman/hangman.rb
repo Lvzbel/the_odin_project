@@ -1,3 +1,5 @@
+require 'set'
+system 'clear'
 end_game = false
 
 # Load and convert txt file into an array
@@ -46,8 +48,8 @@ current_status = deep_copy(new_status)
 
 # Game loop
 until end_game
-  system 'clear'
-
+  # system 'clear'
+  p current_status[:word]
   puts "What would you like to do? Type 'exit' to quit end the game, Type 'save' to save the game and quit or type a single letter to continue with the game \n"
   puts "Scoreboard: #{render_game_score(current_status[:word], current_status[:guessed_letters])}   Tries: #{current_status[:remaining_guesses]}"
   puts "Wrong guesses: #{render_wrong_guesses(current_status[:wrong_guesses])}"
@@ -73,8 +75,13 @@ until end_game
       current_status[:wrong_guesses] << input
     end
     
-    # If we run out of tries end the game
+    # Determined if the game has been won or lost
+    puts "word: #{current_status[:word].length}  guessed: #{current_status[:guessed_letters].length}"
     if current_status[:remaining_guesses] == 0
+      end_game = true
+      puts "Game Lost"
+    elsif current_status[:word].to_set == current_status[:guessed_letters].to_set
+      puts "Game Won"
       end_game = true
     end
   else
