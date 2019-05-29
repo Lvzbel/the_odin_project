@@ -53,6 +53,11 @@ def save_game(status_hash)
   end
 end
 
+def load_game()
+  saved_status = File.read "gamesave.txt"
+  return YAML.load(saved_status)
+end
+
 current_status = deep_copy(new_status)
 
 # Game loop
