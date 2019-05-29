@@ -1,4 +1,4 @@
-end_game = true
+end_game = false
 
 # Load and convert txt file into an array
 dictionary_txt = File.read "5desk.txt"
@@ -23,8 +23,7 @@ new_status = {
   remaining_guesses: 5,
   wrong_guesses: 0,
   word: ramdon_word(dictionary).split(""),
-  guessed_letters: [],
-  right_guesses: []
+  guessed_letters: []
 }
 
 def render_game_score(secret_word_array, guesses_array)
@@ -32,7 +31,7 @@ def render_game_score(secret_word_array, guesses_array)
   secret_word_array.each do |letter|
     guesses_array.include?(letter) ? display << letter : display << "_"
   end
-  puts display
+  display
 end
 
 current_status = deep_copy(new_status)
@@ -41,7 +40,8 @@ current_status = deep_copy(new_status)
 until end_game
   # system 'clear'
 
-  puts "What would you like to do? Type 'exit' to quit end the game, Type 'save' to save the game and quit or type a single letter to continue with the game"
+  puts "What would you like to do? Type 'exit' to quit end the game, Type 'save' to save the game and quit or type a single letter to continue with the game \n"
+  puts "Scoreboard: #{render_game_score(current_status[:word], current_status[:guessed_letters])}   Tries: #{current_status[:remaining_guesses]}"
   input = gets.chomp.downcase
 
   if input == "exit"
@@ -56,5 +56,3 @@ until end_game
     puts "Invalid input please try again"
   end
 end
-
-render_game_score(["c","o","t","o"], ["o", "t"])
