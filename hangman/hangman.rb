@@ -73,6 +73,16 @@ class Hangman
     @remaining_guesses -= 1
   end
 
+  def summit_guess(input)
+    
+    if @word.include?(input)
+      @guessed_letters << input
+    else
+      @wrong_guesses << input
+      self.wrong_guess
+    end
+  end
+
 end
 
 # Select a ramdon word between 5 and 12 chars long 
@@ -184,4 +194,5 @@ end
 player_one = Hangman.new(ramdon_word(dictionary).split(""))
 player_one.load_game
 p player_one.word
+player_one.summit_guess("d")
 puts player_one.render_game_score
