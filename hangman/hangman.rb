@@ -14,8 +14,8 @@ dictionary = dictionary_txt.split(/\n/)
 # Hangman Class
 # ====================================
 class Hangman
-  attr_accessor :word, :wrong_guesses, :guessed_letters
-  attr_reader :remaining_guesses
+  attr_accessor :word, :wrong_guesses, :guessed_letters, :remaining_guesses
+  # attr_reader 
 
   def initialize(word, remaining_guesses = 5)
     @word = word
@@ -46,6 +46,27 @@ class Hangman
 
   def game_lost?
     @remaining_guesses == 0
+  end
+
+  def save_game
+    data = {
+      remaining_guesses: @remaining_guesses,
+      wrong_guesses: @wrong_guesses,
+      word: @word,
+      guessed_letters: @guessed_letters
+    }
+    File.open("test.txt", 'w') do |file|
+      file.puts data.to_yaml
+    end
+  end
+
+  def load_game
+    saved_status = File.read "test.txt"
+    data = YAML.load(saved_status)
+    @remaining_guesses = data[:remaining_guesses]
+    @wrong_guesses = data[:wrong_guesses]
+    @word = data[:word]
+    @guessed_letters = data[:guessed_letters]
   end
 
 end
@@ -156,13 +177,7 @@ end
 
 
 # Class Testing
-# remaining_guesses: 5,
-# wrong_guesses: [],
-# word: ramdon_word(dictionary).split(""),
-# guessed_letters: []
-
 player_one = Hangman.new(ramdon_word(dictionary).split(""))
+player_one.load_game
 p player_one.word
 puts player_one.render_game_score
-puts player_one.game_won?
-puts player_one.game_lost?
