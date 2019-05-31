@@ -20,6 +20,14 @@ class Hangman
     @guessed_letters = []
   end
 
+  def render_game_score
+    display = ""
+    @word.each do |letter|
+      @guessed_letters.include?(letter) ? display << letter : display << "_"
+    end
+    display
+  end
+
 end
 
 # Select a ramdon word between 5 and 12 chars long 
@@ -135,6 +143,4 @@ end
 
 player_one = Hangman.new(ramdon_word(dictionary).split(""))
 p player_one.word
-puts player_one.remaining_guesses
-player_one.wrong_guesses << "benis"
-p player_one.wrong_guesses
+puts player_one.render_game_score
