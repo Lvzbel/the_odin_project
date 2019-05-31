@@ -9,6 +9,10 @@ saved_game = "gamesave.txt"
 dictionary_txt = File.read "5desk.txt"
 dictionary = dictionary_txt.split(/\n/)
 
+
+# ====================================
+# Hangman Class
+# ====================================
 class Hangman
   attr_accessor :word, :wrong_guesses, :guessed_letters
   attr_reader :remaining_guesses
@@ -24,6 +28,14 @@ class Hangman
     display = ""
     @word.each do |letter|
       @guessed_letters.include?(letter) ? display << letter : display << "_"
+    end
+    display
+  end
+
+  def render_wrong_guesses
+    display = ""
+    @wrong_guesses.map do |letter|
+      display << "#{letter}  "
     end
     display
   end
@@ -144,3 +156,5 @@ end
 player_one = Hangman.new(ramdon_word(dictionary).split(""))
 p player_one.word
 puts player_one.render_game_score
+player_one.wrong_guesses << "v"
+p player_one.render_wrong_guesses
