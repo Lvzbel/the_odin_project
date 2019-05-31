@@ -69,6 +69,10 @@ class Hangman
     @guessed_letters = data[:guessed_letters]
   end
 
+  def wrong_guess
+    @remaining_guesses -= 1
+  end
+
 end
 
 # Select a ramdon word between 5 and 12 chars long 
