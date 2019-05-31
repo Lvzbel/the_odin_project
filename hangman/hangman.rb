@@ -12,7 +12,8 @@ dictionary = dictionary_txt.split(/\n/)
 class Hangman
   attr_accessor :word, :wrong_guesses, :guessed_letters
   attr_reader :remaining_guesses
-  def initialize(word, remaining_guesses, wrong_guesses, guessed_letters)
+
+  def initialize(word, remaining_guesses = 5, wrong_guesses = [], guessed_letters = [])
     @word = word
     @remaining_guesses = remaining_guesses
     @wrong_guesses = wrong_guesses
@@ -21,7 +22,7 @@ class Hangman
 
 end
 
-# Select a ramdon word between 5 and 12 chars long
+# Select a ramdon word between 5 and 12 chars long 
 def ramdon_word(words_array)
   random_number = rand(0..words_array.length)
   word = words_array[random_number].gsub!(/\r/, "")
@@ -132,8 +133,7 @@ end
 # word: ramdon_word(dictionary).split(""),
 # guessed_letters: []
 
-player_one = Hangman.new(ramdon_word(dictionary).split(""), 5, [], [])
-
+player_one = Hangman.new(ramdon_word(dictionary).split(""))
 p player_one.word
 puts player_one.remaining_guesses
 player_one.wrong_guesses << "p"
