@@ -40,6 +40,14 @@ class Hangman
     display
   end
 
+  def game_won?
+    @word.to_set == @guessed_letters.to_set
+  end
+
+  def game_lost?
+    @remaining_guesses == 0
+  end
+
 end
 
 # Select a ramdon word between 5 and 12 chars long 
@@ -156,5 +164,5 @@ end
 player_one = Hangman.new(ramdon_word(dictionary).split(""))
 p player_one.word
 puts player_one.render_game_score
-player_one.wrong_guesses << "v"
-p player_one.render_wrong_guesses
+puts player_one.game_won?
+puts player_one.game_lost?
