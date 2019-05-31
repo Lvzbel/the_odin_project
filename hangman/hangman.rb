@@ -74,13 +74,20 @@ class Hangman
   end
 
   def summit_guess(input)
-    
+
     if @word.include?(input)
       @guessed_letters << input
     else
       @wrong_guesses << input
       self.wrong_guess
     end
+  end
+
+  def reset(word)
+    @word = word
+    @remaining_guesses = 5
+    @wrong_guesses = []
+    @guessed_letters = []
   end
 
 end
@@ -194,5 +201,5 @@ end
 player_one = Hangman.new(ramdon_word(dictionary).split(""))
 player_one.load_game
 p player_one.word
-player_one.summit_guess("d")
+player_one.summit_guess("x")
 puts player_one.render_game_score
