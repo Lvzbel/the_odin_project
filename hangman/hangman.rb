@@ -13,11 +13,11 @@ class Hangman
   attr_accessor :word, :wrong_guesses, :guessed_letters
   attr_reader :remaining_guesses
 
-  def initialize(word, remaining_guesses = 5, wrong_guesses = [], guessed_letters = [])
+  def initialize(word, remaining_guesses = 5)
     @word = word
     @remaining_guesses = remaining_guesses
-    @wrong_guesses = wrong_guesses
-    @guessed_letters = guessed_letters
+    @wrong_guesses = []
+    @guessed_letters = []
   end
 
 end
@@ -136,5 +136,5 @@ end
 player_one = Hangman.new(ramdon_word(dictionary).split(""))
 p player_one.word
 puts player_one.remaining_guesses
-player_one.wrong_guesses << "p"
+player_one.wrong_guesses << "benis"
 p player_one.wrong_guesses
