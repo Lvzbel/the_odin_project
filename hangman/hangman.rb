@@ -2,12 +2,24 @@ require 'set'
 require "yaml"
 
 system 'clear'
-end_game = false
+end_game = true
 saved_game = "gamesave.txt"
 
 # Load and convert txt file into an array
 dictionary_txt = File.read "5desk.txt"
 dictionary = dictionary_txt.split(/\n/)
+
+class Hangman
+  attr_accessor :word, :wrong_guesses, :guessed_letters
+  attr_reader :remaining_guesses
+  def initialize(word, remaining_guesses, wrong_guesses, guessed_letters)
+    @word = word
+    @remaining_guesses = remaining_guesses
+    @wrong_guesses = wrong_guesses
+    @guessed_letters = guessed_letters
+  end
+
+end
 
 # Select a ramdon word between 5 and 12 chars long
 def ramdon_word(words_array)
@@ -112,3 +124,17 @@ until end_game
     puts "Invalid input please try again"
   end
 end
+
+
+# Class Testing
+# remaining_guesses: 5,
+# wrong_guesses: [],
+# word: ramdon_word(dictionary).split(""),
+# guessed_letters: []
+
+player_one = Hangman.new(ramdon_word(dictionary).split(""), 5, [], [])
+
+p player_one.word
+puts player_one.remaining_guesses
+player_one.wrong_guesses << "p"
+p player_one.wrong_guesses
