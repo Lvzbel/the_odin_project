@@ -34,4 +34,16 @@ RSpec.describe Calculator do
       expect(calculator.multiply(3, 5, 9)).to eql(135)
     end
   end
+
+  describe "#divide" do
+    it "returns divition of two numbers" do
+      calculator = Calculator.new
+      expect(calculator.divide(10, 5)).to eql(2)
+    end
+
+    it "returns divition of multiple numbers" do
+      calculator = Calculator.new
+      expect(calculator.divide(20, 2, 2)).to eql(5)
+    end
+  end
 end
