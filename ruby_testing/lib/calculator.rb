@@ -1,5 +1,11 @@
 class Calculator
-  def add(a,b)
-    a + b
+
+  def add(*nums)
+    result = 0
+    nums.each do |num|
+      result += num
+    end
+    result
   end
+  
 end
