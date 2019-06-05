@@ -16,4 +16,12 @@ class Calculator
     result
   end
 
+  def multiply(*nums)
+    result = nums[0]
+    nums[1..-1].each do |num|
+      result *= num
+    end
+    result
+  end
+
 end
